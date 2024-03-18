@@ -23,7 +23,7 @@ def logged_in(password_str=-1):
             sys.exit(1)
 
 def logout():
-    logout = requests.get('http://10.201.21.1/logout?')
+    logout = requests.get(base_url+'/logout?')
     if not logged_in():
         print("you are logged out, running the script now!\n\n")
     else:
@@ -71,7 +71,7 @@ def main():
         login_response = requests.post(login_url, data=login_data, cookies=login_cookies)
 
         # Third POST request
-        magic_url = 'http://10.201.21.1/login'
+        magic_url = base_url+'/login'
         magic_data = {
             'username': 'STN-'+username,
             'password': password,
