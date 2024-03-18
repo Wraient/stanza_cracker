@@ -14,4 +14,4 @@ import requests
 # if status_response.status_code == 200:
 #     response_json = status_response.json()
 
-logout = requests.get('http://10.201.21.1/logout?')
+# logout = requests.get('http://10.201.21.1/logout?')
