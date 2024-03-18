@@ -3,9 +3,8 @@ import json
 
 base_url = 'http://10.201.21.1'
 usernames = []
-for i in range(100):
+for i in range(0,100):
     usernames.append("23TSFBA"+f'{i:03}')
-print(usernames)
 
 def logged_in(password_str=-1):
     status_response = requests.get(base_url, allow_redirects=False)
@@ -100,7 +99,7 @@ for username in usernames:
 
             # Write the username and password to a file
             passwords_data=load_passwords_data()
-            passwords_data[username] = password
+            passwords_data[username] = password_str
             with open('passwords.json', 'w') as passwords_file:
                 json.dump(passwords_data, passwords_file, indent=4)
 
