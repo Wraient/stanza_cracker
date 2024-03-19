@@ -6,7 +6,7 @@ import sys
 base_url = 'http://10.201.21.1'
 username = "23TSFBA023"
 
-def logged_in(password_str=-1):
+def logged_in():
     status_response = requests.get(base_url, allow_redirects=False)
 
     if status_response.status_code == 302:
@@ -89,7 +89,7 @@ def main():
             'magic': ''
         }
 
-        if logged_in(password_str):
+        if logged_in():
             print(f"Login successful for username: {username}, password: {password_str}")
             break
         else:

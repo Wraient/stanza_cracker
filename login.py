@@ -7,7 +7,7 @@ password = "0000"
 base_url = 'http://10.201.21.1'
 
 
-def logged_in(password_str=-1):
+def logged_in():
     status_response = requests.get(base_url, allow_redirects=False)
 
     if status_response.status_code == 302:
@@ -57,7 +57,7 @@ magic_data = {
 }
 magic_response = requests.post(magic_url, data=magic_data)
 
-if logged_in:
+if logged_in():
     print("Login Successful.")
 else:
     print("Login Failed.")

